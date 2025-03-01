@@ -1,16 +1,19 @@
 const express = require('express');
 const app = express();
+const port = 3000;
 
-const PORT = 3000;
+// Example endpoint
+app.get('/api/ReactToNode', (req, res) => {
+    // Extract query parameters (if any)
+    const { name } = req.query;
 
-app.get('/', (req, res) => {
-    res.send('Hello, Express!');
+    // Send a response with some data
+    res.status(200).json({
+        message: `Hello, ${name || 'World'}! This is data from the Node.js backend.`,
+        timestamp: new Date().toISOString()
+    });
 });
 
-app.post('/api', (req, res) => {
-    res.send('POST route called')
-});
-
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+app.listen(port, () => {
+    console.log(`Node.js backend running at http://localhost:${port}`);
 });
